@@ -6,5 +6,11 @@ First you need to run delphes simulation on the theory files to produce the dete
 
 ## Detailed procedure
 
-We'll start with a file that contains the locations of your .hep files, file_lists/masterlocal.txt. 
+We'll start with a file that contains the locations of your .hep files, file_lists/masterlocal.txt (see example uploaded).
+
+First, run Delphes detector simulation by using the batch system with the following command:
+```
+./batchsubmit.sh file_lists/masterlocal.txt
+```
+Be careful to comment out either of the lines 23 or 24 depending on whether your files contain seed numbers, i.e. whether there are multiple .hep files of the same model and parameters.
 
