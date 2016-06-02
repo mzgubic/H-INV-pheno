@@ -27,9 +27,14 @@ Then to the scorpion directory and get environment variables:
 cd scorpion/
 source setup.sh
 ```
-then uncomment lines 28 and 29 of the loopdirs.sh script and run:
+Make sure that you've compiled scorpion if you've made any changes to the analysis, then uncomment lines 28 and 29 of the loopdirs.sh script and run:
 ```
 ./loopdirs.sh file_lists/masterlocal.txt 
 ```
-which results in the scorpion output files moved to the .hep files directories.
+which results in the scorpion output files (see jaf_CMS8_hinv20b_analysis20.txt for an example) moved to the .hep files directories.
+
+##### Collect the analysis data in a more useful format
+
+
+
 
