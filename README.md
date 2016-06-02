@@ -6,5 +6,5 @@ First you need to run delphes simulation on the theory files to produce the dete
 
 ## Detailed procedure
 
-We'll start with a file that contains the locations of your .hep files, localmaster.txt. 
+We'll start with a file that contains the locations of your .hep files, file_lists/masterlocal.txt. 
 
