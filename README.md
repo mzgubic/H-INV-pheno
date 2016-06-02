@@ -8,9 +8,28 @@ First you need to run delphes simulation on the theory files to produce the dete
 
 We'll start with a file that contains the locations of your .hep files, file_lists/masterlocal.txt (see example uploaded).
 
+##### Run Delphes detector simulation
+
 First, run Delphes detector simulation by using the batch system with the following command:
 ```
 ./batchsubmit.sh file_lists/masterlocal.txt
 ```
-Be careful to comment out either of the lines 23 or 24 depending on whether your files contain seed numbers, i.e. whether there are multiple .hep files of the same model and parameters.
+This creates a script for each model, submits it to the batch system, and then deletes it. The delphes output file is moved to the directory of the .hep file. Be careful to comment out either of the lines 23 or 24 depending on whether your files contain seed numbers, i.e. whether there are multiple .hep files of the same model and parameters.
+
+If there were multiple delphes outputs per parameter space point you need to hadd the files together so that a single delphes-output.root file is left in the directory.
+
+##### Run scorpion analysis
+
+You need the cross section file pythia-output.log (see example) with the correct cross section for the process in the same directory as the delphes file.
+
+Then to the scorpion directory and get environment variables:
+```
+cd scorpion/
+source setup.sh
+```
+then uncomment lines 28 and 29 of the loopdirs.sh script and run:
+```
+./loopdirs.sh file_lists/masterlocal.txt 
+```
+which results in the scorpion output files moved to the .hep files directories.
 
