@@ -85,8 +85,17 @@ In order to produce the invisible Higgs plot two scripts are needed: plotSMHiggs
 
 #### 4.2 Two parameter models: scalar and pseudoscalar mediators
 
+For two parameter models the situation is slightly more complicated as there is a grid rather than a line of points in parameter space. Every .root file thus contains one line of the grid, and they are created using the makegrid.py script (written by Patrick).
 
+I've used separate directories for models, luminosities, and number of points in the grid combinations, i.e. a directory called 40x40_20fb_mha/ and separate for 300fb, 3000fb, as well as 3 other directories for the scalar mediator. This was necessary because of how makegrid.py works. Lower grid sizes were used for testing only.
 
+Move the interpolated 40x40_invisibleHa_mchi_mha.txt file with yields to the 40x40_20fb_mha/ directory, as well as the makegrid.py script. Go to that directory and execute
+```
+python makegrid.py -i 40x40_invisibleHa_mchi_mha.txt -l 20
+```
+where the -l option refers to the luminosity and should be set accordingly.
+
+Finally use the 
 
 
 
