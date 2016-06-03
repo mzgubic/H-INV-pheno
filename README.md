@@ -9,7 +9,7 @@ First you need to run delphes simulation on the theory files to produce the dete
 
 We'll start with a file that contains the locations of your .hep files, file_lists/masterlocal.txt (see example uploaded).
 
-## Run Delphes detector simulation
+## 1 Run Delphes detector simulation
 
 First, run Delphes detector simulation by using the batch system with the following command:
 ```
@@ -19,7 +19,7 @@ This creates a script for each model, submits it to the batch system, and then d
 
 If there were multiple delphes outputs per parameter space point you need to hadd the files together so that a single delphes-output.root file is left in the directory.
 
-##Run scorpion analysis
+## 2 Run scorpion analysis
 
 You need the cross section file pythia-output.log (see example) with the correct cross section for the process in the same directory as the delphes file.
 
@@ -34,13 +34,13 @@ Make sure that you've compiled scorpion if you've made any changes to the analys
 ```
 which results in the scorpion output files (see jaf_CMS8_hinv20b_analysis20.txt for an example) moved to the .hep files directories.
 
-## Collect the analysis data in a more useful format
+## 3 Collect the analysis data in a more useful format
 
 Collect the scorpion outputs from all the different directories by running:
 ```
 ./plotter_input.sh file_lists/masterlocal.txt 
 ```
-which needs the folder "scripts" and the python scripts inside to execute properly. This doesn't only collect the outputs, it also performs some transformations on it. For example, the yields from effective operators are scaled in order to make the limit setting converge.
+which needs the folder "scripts" and the python scripts inside to execute properly. This doesn't only collect the outputs, it also performs some transformations on it. For example, the yields from effective operators are scaled in order to make the limit setting converge. Don't worry about the lambda800 at the end of the output filenames, they have no meaning, I just didn't correct it when expanding the code.
 
 There are too few points to make pretty plots with the data available so we resort to interpolation between them to make it smoother. For EFTs this is done automatically as there is one parameter and the required Python package is available on the lx04 machine. However, for the two parameter simplified models (scalar and pseudoscalar) this needs to be done on a separate machine where the scipy.interpolate.griddata is available. To interpolate the scalar and pseudoscalar models, run:
 ```
@@ -48,7 +48,7 @@ python interpolate.py invisibleH2_mchi_mh2.txt
 ```
 and the same script on the pseudoscalar output.
 
-## CMSSW limit setting and plotting
+## 4 CMSSW limit setting and plotting
 
 Now you need to move to the directory CMSSW_7_1_5/src/HiggsAnalysis/CombinedLimit/plotting/ and execute
 ```
@@ -62,7 +62,17 @@ export SCRAM_ARCH=slc6_amd64_gcc491'
 ```
 in your .bashrc file in the home directory. 
 
-The calculation of the limits and the plotting are separated to save time. Each model has its own subfolder containing the limits at different luminosities. 
+The calculation of the limits and the plotting are separated to save time. One and two parameter models are treated separately.
+
+#### 4.1 One parameter models: EFTs and invisible Higgs
+
+For this you need cardmaker.py script in the home directory and the two scripts EFTlimit.py and EFTplots.sh in the CMSSW/.../plotting directory. Create subdirectories in the plotting folder for each model and put in the outputs from section 3, i.e. put D5a_mchi_lambda800.txt in the folder CMSSW/.../plotting/D5a/. Model name for invisible Higgs should be invisibleHiggs. 
+
+Uncomment lines 3-9 in the EFTplots.sh and set the models and luminosities you want to calculate the limits for. Then run
+```
+./EFTplots.sh
+```
+
 
 
 
