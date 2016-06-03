@@ -1,16 +1,15 @@
-# H-INV-pheno
 Reproducing the plots of limits on the SM Higgs. I've used Delphes-3.2.0 that was slightly modified to include the variables needed for the analysis. This document will take you from the theory output files (model_parameters.hep format) to the plot. I'll outline the general procedure first and then describe it in detail with references to the scripts you can use to make the process automatic.
 
 Apologies for the poorly structured and written code. Contact me on miha.zgubic@cern.ch if there is something wrong with the procedure or needs additional clarification.
 
-## General procedure
+# General procedure
 First you need to run delphes simulation on the theory files to produce the detector signature. Then you run the scorpion analysis on the delphes files to get the yield passing the selection of your analysis. From here you use the analysis yield to create the cards for the CMSSW limit setting program, which is done by a script that Patrick wrote. These limits are then written to a .root file in the not most obvious way as the procedure was recycled from a code other people wrote before us. Finally a plotting script takes these .root files and produces a plot.
 
-## Detailed procedure
+# Detailed procedure
 
 We'll start with a file that contains the locations of your .hep files, file_lists/masterlocal.txt (see example uploaded).
 
-##### Run Delphes detector simulation
+## Run Delphes detector simulation
 
 First, run Delphes detector simulation by using the batch system with the following command:
 ```
@@ -20,7 +19,7 @@ This creates a script for each model, submits it to the batch system, and then d
 
 If there were multiple delphes outputs per parameter space point you need to hadd the files together so that a single delphes-output.root file is left in the directory.
 
-##### Run scorpion analysis
+##Run scorpion analysis
 
 You need the cross section file pythia-output.log (see example) with the correct cross section for the process in the same directory as the delphes file.
 
@@ -35,7 +34,7 @@ Make sure that you've compiled scorpion if you've made any changes to the analys
 ```
 which results in the scorpion output files (see jaf_CMS8_hinv20b_analysis20.txt for an example) moved to the .hep files directories.
 
-##### Collect the analysis data in a more useful format
+## Collect the analysis data in a more useful format
 
 Collect the scorpion outputs from all the different directories by running:
 ```
@@ -49,7 +48,7 @@ python interpolate.py invisibleH2_mchi_mh2.txt
 ```
 and the same script on the pseudoscalar output.
 
-##### CMSSW limit setting and plotting
+## CMSSW limit setting and plotting
 
 Now you need to move to the directory CMSSW_7_1_5/src/HiggsAnalysis/CombinedLimit/plotting/ and execute
 ```
