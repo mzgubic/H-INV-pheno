@@ -95,7 +95,7 @@ python makegrid.py -i 40x40_invisibleHa_mchi_mha.txt -l 20
 ```
 where the -l option refers to the luminosity and should be set accordingly.
 
-Finally use the 
+Finally use the higgsplots.sh script by uncommenting the appropriate lines to create the on and off shell parts of the plots, which then have to be merged by hand. For this to work, plotMultiOnShell.py and pltMultiOffShell are needed.
 
 
 
