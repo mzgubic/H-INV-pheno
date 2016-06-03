@@ -72,6 +72,13 @@ Uncomment lines 3-9 in the EFTplots.sh and set the models and luminosities you w
 ```
 ./EFTplots.sh
 ```
+This creates .root files with the limits of the models at different luminosities, and puts them into the model directories. Now you need the script plot2EFTs.py in the plotting/ directory, and uncomment the lines 14, 16, and 18 and once again run
+```
+./EFTplots.sh
+```
+which should produce the EFT limits as a function of dark matter mass at different luminosities and models, with each plot representing one class of models, grouped by their dimensionality. I suggest uncommenting each line separately as the code someone produces a broken plot and running EFTplots.sh a couple of times so that it gets it right (I don't know what causes this).
+
+Note that if you want 4 models per plot for D5a you need to uncomment line 13 and need an additional script plot4EFTs.py.
 
 
 
