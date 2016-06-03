@@ -35,6 +35,23 @@ which results in the scorpion output files (see jaf_CMS8_hinv20b_analysis20.txt 
 
 ##### Collect the analysis data in a more useful format
 
+Collect the scorpion outputs from all the different directories by running:
+```
+./plotter_input.sh file_lists/masterlocal.txt 
+```
+which needs the folder "scripts" and the python scripts inside to execute properly. This doesn't only collect the outputs, it also performs some transformations on it. For example, the yields from effective operators are scaled in order to make the limit setting converge.
+
+There are too few points to make pretty plots with the data available so we resort to interpolation between them to make it smoother. For EFTs this is done automatically as there is one parameter and the required Python package is available on the lx04 machine. However, for the two parameter simplified models (scalar and pseudoscalar) this needs to be done on a separate machine where the scipy.interpolate.griddata is available. To interpolate the scalar and pseudoscalar models, run:
+```
+python interpolate.py invisibleH2_mchi_mh2.txt
+```
+and the same script on the pseudoscalar output.
+
+##### CMSSW limit setting
+
+
+
+
 
 
 
