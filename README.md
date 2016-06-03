@@ -1,7 +1,7 @@
 # H-INV-pheno
 Reproducing the plots of limits on the SM Higgs. I've used Delphes-3.2.0 that was slightly modified to include the variables needed for the analysis. This document will take you from the theory output files (model_parameters.hep format) to the plot. I'll outline the general procedure first and then describe it in detail with references to the scripts you can use to make the process automatic.
 
-Contact me on miha.zgubic@cern.ch if there is something wrong with the procedure or needs additional clarification.
+Apologies for the poorly structured and written code. Contact me on miha.zgubic@cern.ch if there is something wrong with the procedure or needs additional clarification.
 
 ## General procedure
 First you need to run delphes simulation on the theory files to produce the detector signature. Then you run the scorpion analysis on the delphes files to get the yield passing the selection of your analysis. From here you use the analysis yield to create the cards for the CMSSW limit setting program, which is done by a script that Patrick wrote. These limits are then written to a .root file in the not most obvious way as the procedure was recycled from a code other people wrote before us. Finally a plotting script takes these .root files and produces a plot.
@@ -49,8 +49,21 @@ python interpolate.py invisibleH2_mchi_mh2.txt
 ```
 and the same script on the pseudoscalar output.
 
-##### CMSSW limit setting
+##### CMSSW limit setting and plotting
 
+Now you need to move to the directory CMSSW_7_1_5/src/HiggsAnalysis/CombinedLimit/plotting/ and execute
+```
+cms
+cmsenv
+```
+where the cms command should be defined as:
+```
+alias cms='source /vols/cms/grid/setup.sh;
+export SCRAM_ARCH=slc6_amd64_gcc491'
+```
+in your .bashrc file in the home directory. 
+
+The calculation of the limits and the plotting are separated to save time. Each model has its own subfolder containing the limits at different luminosities. 
 
 
 
