@@ -78,8 +78,12 @@ This creates .root files with the limits of the models at different luminosities
 ```
 which should produce the EFT limits as a function of dark matter mass at different luminosities and models, with each plot representing one class of models, grouped by their dimensionality. I suggest uncommenting each line separately as the code someone produces a broken plot and running EFTplots.sh a couple of times so that it gets it right (I don't know what causes this).
 
-Note that if you want 4 models per plot for D5a you need to uncomment line 13 and need an additional script plot4EFTs.py.
+In order to produce the invisible Higgs plot two scripts are needed: plotSMHiggslumis.py and higgsplots.sh. Uncomment line 17 of higgsplots.sh and run
+```
+./higgsplots.sh
+```
 
+#### 4.2 Two parameter models: scalar and pseudoscalar mediators
 
 
 
